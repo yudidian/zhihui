@@ -1,10 +1,13 @@
 import React from 'react';
 import {ErrorBlock} from "antd-mobile"
+import "./style/index.scss"
 
 function NotFund(){
   return (
       <>
-        <ErrorBlock status='empty' />
+        <div className="not-find-wrapper">
+          <ErrorBlock status='empty' />
+        </div>
       </>
   );
 }

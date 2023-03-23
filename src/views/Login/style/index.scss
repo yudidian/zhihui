@@ -1,0 +1,17 @@
+.login_wrapper{
+  width: 100vw;
+  height: 100vh;
+  background-color: #dedede;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .adm-card{
+    width: 85%;
+    border-radius: 18px;
+    .form-title{
+      text-align: center;
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+}

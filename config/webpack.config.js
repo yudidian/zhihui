@@ -148,7 +148,7 @@ module.exports = function (webpackEnv) {
                   // which in turn let's users customize the target behavior as per their needs.
                   'postcss-normalize',
                     px2rem({
-                      rootValue: 75,
+                      rootValue: 37.5,
                       propList: ['*'] // 所有文件中px 都进行转换
                     })
                 ]
@@ -165,7 +165,7 @@ module.exports = function (webpackEnv) {
                     },
                   ],
                   px2rem({
-                    rootValue: 75,
+                    rootValue: 37.5,
                     propList: ['*'] // 所有文件中px 都进行转换
                   })
                 ],
