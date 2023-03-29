@@ -78,3 +78,20 @@ export const removeStoreNews = (params) => {
 export const getStoreList = () => {
   return http.get("/store_list")
 }
+
+const api = {
+  getNewsLatestInfo,
+  getNewsBeforeInfo,
+  getNewsStoryExtra,
+  getNewsDetailInfo,
+  getPhoneCode,
+  login,
+  uploadImage,
+  getUserinfo,
+  updateUserInfo,
+  storeNews,
+  removeStoreNews,
+  getStoreList
+}
+
+export default api

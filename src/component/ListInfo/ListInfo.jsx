@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Image, Space, SpinLoading} from "antd-mobile";
+import {Image, Space, SpinLoading, Toast} from "antd-mobile";
 import propTypes from "prop-types"
 
 function ListInfo(props) {
-  const {navigator} = props
+  const {getNewList, navigator} = props
   const [isShowLoading, setLoading] = useState(false)
   const [newList, setNewList] = useState([1,2,3,4])
   const homeList = useRef()
@@ -14,11 +14,22 @@ function ListInfo(props) {
         setLoading(true)
       }
     })
+    getNewList().then(
+        res => {
+          if (res.code === 0) {
+            newList.push(...res.list)
+            setNewList(newList)
+          } else {
+            Toast({
+
+            })
+          }
+        }
+    )
   }, [])
   useEffect(() => {
     if (isShowLoading) {
       newList.push(...[5,6,7,8,9])
-      console.log(newList)
       setNewList(newList)
       setLoading(false)
     }
@@ -67,6 +78,7 @@ function ListInfo(props) {
 }
 
 ListInfo.propTypes = {
-  newList: propTypes.array.isRequired
+  newList: propTypes.array.isRequired,
+  getNewList: propTypes.func.isRequired
 }
 export default ListInfo;
