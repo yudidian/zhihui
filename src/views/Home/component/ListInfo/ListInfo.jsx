@@ -1,57 +1,53 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Image, Space, SpinLoading} from "antd-mobile";
+import React, {forwardRef} from 'react';
+import {Divider, Image, Space, SpinLoading} from "antd-mobile";
 import propTypes from "prop-types"
+import NewsListSkeleton from "@/views/Home/component/ListInfo/NewsListSkeleton";
+import dayjs from "dayjs";
+import {Link} from "react-router-dom"
 
-function ListInfo(props) {
-  const {navigator} = props
-  const [isShowLoading, setLoading] = useState(false)
-  const [newList, setNewList] = useState([1,2,3,4])
-  const homeList = useRef()
-  useEffect(() => {
-    const el = homeList.current
-    el.addEventListener("scroll", (e) => {
-      if (el.clientHeight + el.scrollTop === el.scrollHeight) {
-        setLoading(true)
-      }
-    })
-  }, [])
-  useEffect(() => {
-    if (isShowLoading) {
-      newList.push(...[5,6,7,8,9])
-      console.log(newList)
-      setNewList(newList)
-      setLoading(false)
-    }
-  }, [isShowLoading, newList])
-
-  const toDetail = (id) => {
-    navigator(`/detail/${id}`)
+const ListInfo = forwardRef((props, ref) => {
+  const {isShowSkeleton, bottomLoading, newListInfo} = props
+  const formatDate = function (date) {
+    return dayjs(date).format("MM月DD")
   }
   return (
       <>
-        <div className="home-list-wrapper" ref={homeList}>
+        <div className="home-list-wrapper" ref={ref}>
           {
-            newList.map((item, index) => {
-              const {imageUrl, title} = item
+            newListInfo.map((list, index) => {
+              const {date, newList} = list
               return (
-                  <div className="home-list-info" key={index} onClick={() => toDetail(item.id)}>
-                    <div className="info-left">
-                      <div className="title">
-                        {title}
-                      </div>
-                      <div className="message">
-                        用户阅读
-                      </div>
-                    </div>
-                    <div className="info-right">
-                      <Image src={imageUrl} fit='cover' width={60} height={60}></Image>
-                    </div>
+                  <div key={date ? date : index}>
+                    <Divider contentPosition='left' style={{
+                      color: '#adadad'
+                    }}>{formatDate(date)}</Divider>
+                    {
+                        newList && newList.map((item, index) => {
+                          const {images, title, hint, id} = item
+                          return isShowSkeleton ?
+                              <NewsListSkeleton key={index}></NewsListSkeleton>
+                              :
+                              <Link to={`/detail/${id}`} className="home-list-info" key={index}>
+                                <div className="info-left">
+                                  <div className="title">
+                                    {title}
+                                  </div>
+                                  <div className="message">
+                                    {hint}
+                                  </div>
+                                </div>
+                                <div className="info-right">
+                                  <Image src={images ? images[0] : ""} fit='cover' width={60} height={60} lazy></Image>
+                                </div>
+                              </Link>
+                        })
+                    }
                   </div>
               )
             })
           }
           {
-            isShowLoading ?
+            bottomLoading ?
                 <Space justify="center" align="center" block>
                   <span style={{marginRight: "10px", fontSize: "16px"}}>加载中</span>
                   <SpinLoading color='default' style={{'--size': '18px'}}/>
@@ -64,9 +60,11 @@ function ListInfo(props) {
         </div>
       </>
   );
+})
+ListInfo.defaultProps = {
+  bottomLoading: true
 }
-
 ListInfo.propTypes = {
-  newList: propTypes.array.isRequired
+  newListInfo: propTypes.array.isRequired
 }
 export default ListInfo;

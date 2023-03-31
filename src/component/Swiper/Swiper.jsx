@@ -1,16 +1,26 @@
 import React from 'react';
 import {Image, Swiper} from "antd-mobile";
 import PropTypes from "prop-types"
+import "./style/index.scss"
 
 function MySwiper(props) {
   const {urlList, height} = props
   const items = urlList.map((item, index) => {
-    return(
+    const {hint, image, title} = item
+     return(
         <Swiper.Item key={index}>
-          <Image src={item} fit='cover' style={{
-            "--adm-image-width": "100%",
-            "--adm-image-height": "100%"
-          }}/>
+          <div className="swiper-content">
+            <Image src={image} fit='cover' style={{
+              "--adm-image-width": "100%",
+              "--adm-image-height": "100%"
+            }}/>
+            <p className="content-title">
+              {title}
+            </p>
+            <p className="content-author">
+              {hint}
+            </p>
+          </div>
         </Swiper.Item>
     )
   })
@@ -21,7 +31,13 @@ function MySwiper(props) {
             loop={true}
             indicatorProps={{
               style: {
-                marginLeft: "280px"
+                '--dot-color': 'rgba(255,255,255,0.4)',
+                '--active-dot-color': '#ffffff',
+                '--dot-size': '10px',
+                '--active-dot-size': '20px',
+                '--dot-border-radius': '50%',
+                '--active-dot-border-radius': '15px',
+                '--dot-spacing': '8px',
               }
             }}
             style={{

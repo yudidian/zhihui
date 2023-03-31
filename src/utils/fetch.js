@@ -16,7 +16,6 @@
 import _ from '@/utils/utils';
 import qs from 'qs';
 import { Toast  } from 'antd-mobile';
-import {BASE_URL} from "@/api/config";
 
 /* 核心方法 */
 const http = function http(config) {
@@ -63,7 +62,7 @@ const http = function http(config) {
   };
   if (/^(POST|PUT|PATCH)$/i.test(method) && body) config.body = body;
   // 生成完整地址
-  url += BASE_URL
+  url = "/api" + url
   return fetch(url, config)
       .then(response => {
         let { status, statusText } = response;

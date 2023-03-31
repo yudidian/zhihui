@@ -1,8 +1,11 @@
+.home_wrapper{
+  height: 100vh;
+  overflow-y: auto;
+}
 .home-header-wrapper{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 14px;
   .time{
     flex: 1;
     display: flex;
@@ -35,23 +38,35 @@
     flex: 1.5;
   }
 }
+// home-list-wrapper-------start
 .home-list-wrapper {
-  height: calc(667px - 264px);
-  overflow: auto;
+  padding: 10px 20px;
   .home-list-info{
+    color: black;
+    padding: 20px 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 120px;
     .info-left{
       display: flex;
       width: 300px;
       flex-direction: column;
       .title{
         font-weight: 900;
-        font-size: 24px;
+        font-size: 22px;
+        /*1. 超出的部分隐藏 */
+        overflow: hidden;
+        /*2. 文字用省略号替代超出的部分 */
+        text-overflow: ellipsis;
+        /* 3. 弹性伸缩盒子模型显示 */
+        display: -webkit-box;
+        /* 4. 限制在一个块元素显示的文本的行数 */
+        -webkit-line-clamp: 2;
+        /* 5. 设置或检索伸缩盒对象的子元素的排列方式 */
+        -webkit-box-orient: vertical;
       }
       .message{
+        padding-top: 10px;
         color: #868585;
         font-size: 14px;
       }
@@ -60,5 +75,16 @@
 
     }
   }
-
+  .adm-divider-horizontal::before {
+    max-width: 0!important;
+  }
 }
+// home-list-wrapper------end
+
+
+
+// news-list-skeleton-------------------------start
+.news-list-skeleton{
+  padding: 10px 20px;
+}
+// news-list-skeleton-------------------------end
