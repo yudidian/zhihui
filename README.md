@@ -1,7 +1,9 @@
 ## react 学习笔记
 
 ### 安装项目
+
 + create-react-app 项目名称
+
 ### 项目初始化操作
 
 + 暴露配置文件 命令：
@@ -14,7 +16,9 @@
 
 ```js
  alias: {
-  "@": paths.appSrc
+  "@"
+:
+  paths.appSrc
 }
 ```
 
@@ -1335,10 +1339,12 @@ Object.defineProperty(obj, "y", {
 + element 中的组件可以进行二次加工将 location、match、navigate 通过props 传递过去
 + element 中传递的必须是一个组件，其他类型的会报错
 
-### useReducer 
+### useReducer
+
 + useState 的升级版
 + 使用方法与redux 中的reducer 大致相同
 + 适用于复杂的状态管理
+
 ```jsx
 import React, {useReducer} from 'react';
 /*
@@ -1372,12 +1378,14 @@ function UseReducerDome(props) {
             dispatch({
               type: 'increment'
             })
-          }}>增加</button>
+          }}>增加
+          </button>
           <button onClick={() => {
             dispatch({
               type: 'decrement'
             })
-          }}>减少</button>
+          }}>减少
+          </button>
         </div>
       </>
   );
@@ -1387,8 +1395,11 @@ export default UseReducerDome;
 ```
 
 ## 项目操作
+
 ### 知乎日报
+
 ### rem转化
+
 ```jsx
 // webpack.config.js 添加配置
 // loader: require.resolve('postcss-loader') 此处添加配置
@@ -1398,7 +1409,9 @@ px2rem({
   propList: ['*'] // 所有文件中px 都进行转换
 })
 ```
+
 ### 处理异步请求数据
+
 + 需要根据请求数据的内容来渲染页面时，不能直接在函数中使用定义的状态值
 + 方式一 使用传参的形式，将服务器返回的数据直接传递给函数
 + 方式二 使用useEffect 函数监听状态值的改变

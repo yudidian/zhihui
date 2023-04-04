@@ -1,20 +1,20 @@
-import Header from "@/views/Home/component/Header";
-import "./style/index.scss"
-import MySwiper from "@/component/Swiper/Swiper";
-import ListInfo from "@/views/Home/component/ListInfo/ListInfo";
-import {useEffect, useRef, useState} from "react";
-import {getNewsBeforeInfo, getNewsLatestInfo} from "@/api";
-import dayjs from "dayjs";
-import _ from "lodash";
+import Header from '@/views/Home/component/Header'
+import './style/index.scss'
+import MySwiper from '@/component/Swiper/Swiper'
+import ListInfo from '@/views/Home/component/ListInfo/ListInfo'
+import {useEffect, useRef, useState} from 'react'
+import {getNewsBeforeInfo, getNewsLatestInfo} from '@/api'
+import dayjs from 'dayjs'
+import _ from 'lodash'
 
 function Home(props) {
   const homeWrapper = useRef(null)
   const newListWrapper = useRef(null)
   const [bottomLoading, setBottomLoading] = useState(true)
   const [isShowSkeleton, setIsShowSkeleton] = useState(true)
-  const [resDate, setResDate] = useState(dayjs(new Date()).format("YYYYMMDD"))
+  const [resDate, setResDate] = useState(dayjs(new Date()).format('YYYYMMDD'))
   const [newListInfo, setNewListInfo] = useState([{date: new Date(), newList: [{}, {}, {}]}])
-  const [topStories, setTopStories] = useState([])
+  const [topStories, setTopStories] = useState([{}])
 
   useEffect(() => {
     (async () => {
@@ -50,7 +50,7 @@ function Home(props) {
         const res = await getNewsBeforeInfo({
           time: resDate
         })
-        setResDate(yesterday.format("YYYYMMDD"))
+        setResDate(yesterday.format('YYYYMMDD'))
         const list = [...newListInfo]
         list.push({
           date: res.date,
@@ -62,15 +62,20 @@ function Home(props) {
     }
   }, [bottomLoading, newListInfo, resDate])
   return (
-      <>
-        <div className="home_wrapper" ref={homeWrapper}>
-          <Header></Header>
-          <MySwiper urlList={topStories} height={300}></MySwiper>
-          <ListInfo ref={newListWrapper} {...props} newListInfo={newListInfo} bottomLoading={bottomLoading}
-                    isShowSkeleton={isShowSkeleton}></ListInfo>
-        </div>
-      </>
-  );
+    <>
+      <div className="home_wrapper" ref={homeWrapper}>
+        <Header {...props}></Header>
+        <MySwiper urlList={topStories} height={300}></MySwiper>
+        <ListInfo
+          ref={newListWrapper}
+          {...props}
+          newListInfo={newListInfo}
+          bottomLoading={bottomLoading}
+          isShowSkeleton={isShowSkeleton}
+        ></ListInfo>
+      </div>
+    </>
+  )
 }
 
-export default Home;
+export default Home
