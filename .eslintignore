@@ -1,0 +1,8 @@
+config/
+node_modules/
+scripts/
+src/setupProxy.js
+src/setupTests.js
+src/assets/
+*.test.js
+src/api/

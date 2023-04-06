@@ -1,50 +1,50 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {Image, Space, SpinLoading, Toast} from 'antd-mobile'
-import propTypes from 'prop-types'
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, Space, SpinLoading, Toast } from 'antd-mobile';
+import propTypes from 'prop-types';
 
 function ListInfo(props) {
-  const {getNewList, navigator} = props
-  const [isShowLoading, setLoading] = useState(false)
-  const [newList, setNewList] = useState([1,2,3,4])
-  const homeList = useRef()
+  const { getNewList, navigator } = props;
+  const [isShowLoading, setLoading] = useState(false);
+  const [newList, setNewList] = useState([1,2,3,4]);
+  const homeList = useRef();
   useEffect(() => {
-    const el = homeList.current
+    const el = homeList.current;
     el.addEventListener('scroll', (e) => {
       if (el.clientHeight + el.scrollTop === el.scrollHeight) {
-        setLoading(true)
+        setLoading(true);
       }
-    })
+    });
     getNewList().then(
       res => {
         if (res.code === 0) {
-          newList.push(...res.list)
-          setNewList(newList)
+          newList.push(...res.list);
+          setNewList(newList);
         } else {
           Toast({
             icon: 'fail',
             content: res.codeText
-          })
+          });
         }
       }
-    )
-  }, [])
+    );
+  }, []);
   useEffect(() => {
     if (isShowLoading) {
-      newList.push(...[5,6,7,8,9])
-      setNewList(newList)
-      setLoading(false)
+      newList.push(...[5,6,7,8,9]);
+      setNewList(newList);
+      setLoading(false);
     }
-  }, [isShowLoading, newList])
+  }, [isShowLoading, newList]);
 
   const toDetail = (id) => {
-    navigator(`/detail/${id}`)
-  }
+    navigator(`/detail/${id}`);
+  };
   return (
     <>
       <div className="home-list-wrapper" ref={homeList}>
         {
           newList.map((item, index) => {
-            const {imageUrl, title} = item
+            const { imageUrl, title } = item;
             return (
               <div className="home-list-info" key={index} onClick={() => toDetail(item.id)}>
                 <div className="info-left">
@@ -59,27 +59,27 @@ function ListInfo(props) {
                   <Image src={imageUrl} fit='cover' width={60} height={60}></Image>
                 </div>
               </div>
-            )
+            );
           })
         }
         {
           isShowLoading ?
             <Space justify="center" align="center" block>
-              <span style={{marginRight: '10px', fontSize: '16px'}}>加载中</span>
-              <SpinLoading color='default' style={{'--size': '18px'}}/>
+              <span style={{ marginRight: '10px', fontSize: '16px' }}>加载中</span>
+              <SpinLoading color='default' style={{ '--size': '18px' }}/>
             </Space>
             :
             <Space justify="center" align="center" block>
-              <span style={{fontSize: '16px'}}>没有更多了</span>
+              <span style={{ fontSize: '16px' }}>没有更多了</span>
             </Space>
         }
       </div>
     </>
-  )
+  );
 }
 
 ListInfo.propTypes = {
   newList: propTypes.array.isRequired,
   getNewList: propTypes.func.isRequired
-}
-export default ListInfo
+};
+export default ListInfo;

@@ -1,6 +1,6 @@
-import React from 'react'
-import {Mask, SpinLoading} from 'antd-mobile'
-import './style/index.scss'
+import React from 'react';
+import { Mask, SpinLoading } from 'antd-mobile';
+import './style/index.scss';
 
 function FullLoading(props) {
   return (
@@ -11,7 +11,7 @@ function FullLoading(props) {
         </Mask>
       </div>
     </>
-  )
+  );
 }
 
-export default FullLoading
+export default FullLoading;

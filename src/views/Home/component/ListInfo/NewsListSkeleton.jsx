@@ -1,4 +1,4 @@
-import {Skeleton} from 'antd-mobile'
+import { Skeleton } from 'antd-mobile';
 
 const NewsListSkeleton = function () {
   return(
@@ -6,7 +6,7 @@ const NewsListSkeleton = function () {
       <Skeleton.Title animated />
       <Skeleton.Paragraph lineCount={5} animated />
     </div>
-  )
-}
+  );
+};
 
-export default NewsListSkeleton
+export default NewsListSkeleton;

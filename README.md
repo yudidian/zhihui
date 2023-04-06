@@ -14,11 +14,9 @@
 
 + 配置路径别名： webpack.config.js
 
-```js
+```
  alias: {
-  "@"
-:
-  paths.appSrc
+  "@": paths.appSrc
 }
 ```
 

@@ -1,7 +1,8 @@
-import NotFund from '@/views/404'
-import {lazy} from 'react'
-import {Navigate} from 'react-router-dom'
-
+import NotFund from '@/views/404';
+import { lazy } from 'react';
+import { Navigate } from 'react-router-dom';
+import { withKeepAlive } from 'keepalive-react-component';
+import Home from '@/views/Home/index';
 const routers = [
   {
     path: '/',
@@ -12,7 +13,10 @@ const routers = [
   {
     path: '/home',
     name: 'home',
-    component: lazy(() => import('@/views/Home/index')),
+    component: withKeepAlive(Home, {
+      cacheId: 'home',
+      scroll: true
+    }),
     meta: {}
   },
   {
@@ -49,8 +53,10 @@ const routers = [
     path: '*',
     name: 'NotFund',
     component: () => <NotFund />,
-    meta: {}
+    meta: {
+      title: '404'
+    }
   }
-]
+];
 
-export default routers
+export default routers;

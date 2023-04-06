@@ -1,7 +1,7 @@
-import baseActions from '@/store/actions/baseActions'
+import baseActions from '@/store/actions/baseActions';
 
 const actions = {
   baseActions
-}
+};
 
-export default actions
+export default actions;

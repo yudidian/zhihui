@@ -1,42 +1,52 @@
-import React, {useEffect, useState} from 'react'
-import {Dialog, Image, List, NavBar} from 'antd-mobile'
-import './style/index.scss'
-import {CloseOutline, StarOutline} from 'antd-mobile-icons'
-import {getUserinfo} from '@/api'
+import React, { useEffect, useState } from 'react';
+import { Dialog, Image, List, NavBar } from 'antd-mobile';
+import './style/index.scss';
+import { CloseOutline, StarOutline } from 'antd-mobile-icons';
+import { getUserinfo } from '@/api';
 
 function Mine(props) {
-  const {navigate} = props
+  const { navigate } = props;
   const [userInfo, setUserInfo] = useState({
     name: '',
     pic: ''
-  })
+  });
   useEffect(() => {
     (async () => {
-      const res = await getUserinfo()
+      const res = await getUserinfo();
       if (res.code === 0) {
-        setUserInfo(res.data)
+        setUserInfo(res.data);
       }
-    })()
-  }, [])
+    })();
+  }, []);
   const loginOutHandle = () => {
     Dialog.confirm({
       title: '是否要退出登录',
       onConfirm: () => {
         navigate('/login', {
           replace: true
-        })
-        localStorage.clear()
+        });
+        localStorage.clear();
       }
-    })
-  }
+    });
+  };
   return (
     <>
       <div className="mine-wrapper">
         <NavBar onBack={() => {
-          navigate(-1)
+          navigate(-1);
         }}>个人中心</NavBar>
         <div className="user-info">
-          <div className="user-avatar">
+          <div
+            className="user-avatar"
+            onClick={() => {
+              navigate('/update', {
+                state: {
+                  url: userInfo.pic,
+                  username: userInfo.name
+                }
+              });
+            }}
+          >
             <Image
               fit="cover"
               src={userInfo.pic}
@@ -54,14 +64,14 @@ function Mine(props) {
         <List>
           <List.Item
             onClick={() => {
-              navigate('/collect')
+              navigate('/collect');
             }}
             prefix={<StarOutline/>}>
               我的收藏
           </List.Item>
           <List.Item
             onClick={() => {
-              loginOutHandle()
+              loginOutHandle();
             }}
             prefix={<CloseOutline/>}>
               退出登录
@@ -69,7 +79,7 @@ function Mine(props) {
         </List>
       </div>
     </>
-  )
+  );
 }
 
-export default Mine
+export default Mine;

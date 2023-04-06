@@ -1,12 +1,12 @@
-import React from 'react'
-import {Image, Swiper} from 'antd-mobile'
-import PropTypes from 'prop-types'
-import './style/index.scss'
+import React from 'react';
+import { Image, Swiper } from 'antd-mobile';
+import PropTypes from 'prop-types';
+import './style/index.scss';
 
 function MySwiper(props) {
-  const {urlList, height} = props
+  const { urlList, height } = props;
   const items = urlList.map((item, index) => {
-    const {hint, image, title} = item
+    const { hint, image, title } = item;
     return(
       <Swiper.Item key={index}>
         <div className="swiper-content">
@@ -22,8 +22,8 @@ function MySwiper(props) {
           </p>
         </div>
       </Swiper.Item>
-    )
-  })
+    );
+  });
   return (
     <>
       <Swiper
@@ -47,13 +47,13 @@ function MySwiper(props) {
         {items}
       </Swiper>
     </>
-  )
+  );
 }
 MySwiper.defaultProps = {
   height: 200
-}
+};
 MySwiper.propTypes = {
   urlList: PropTypes.array.isRequired,
   height: PropTypes.number
-}
-export default MySwiper
+};
+export default MySwiper;
